@@ -10,8 +10,6 @@ public class JogadorScript : MonoBehaviour
 
     private Animator AnimacaoMovimento;
 
-    private string AnimacaoAuxiliar;
-
     #endregion :: Atributos ::
 
     void Start()
