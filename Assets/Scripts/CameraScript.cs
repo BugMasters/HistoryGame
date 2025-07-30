@@ -14,6 +14,8 @@ public class CameraScript : MonoBehaviour
     [SerializeField]
     private bool Seguir;
 
+
+
     void Start()
     {
         Seguir = true;
