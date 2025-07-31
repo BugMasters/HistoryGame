@@ -12,7 +12,7 @@ public class RecursosScript : MonoBehaviour
     [SerializeField]
     private int Ferro;
 
-    public void RecursoColetado(string pNomeRecurso, int pQuantidade = 1)
+    public void RecursoColetado(string pNomeRecurso, int pQuantidade)
     {
         switch (pNomeRecurso)
         {
