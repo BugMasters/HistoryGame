@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6765714775449045257}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 9.809999, y: -0.9399998, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -104,9 +104,10 @@ MonoBehaviour:
   Sprites:
   - {fileID: 817871380398753249, guid: 581db7b931a56444c80ee4f68c0c3cef, type: 3}
   - {fileID: -1313930202597854290, guid: 887a29ad98e870c4d8e9132873dd5427, type: 3}
-  Recurso: Frutas
+  Recurso: 1
   Quantidade: 0100000005000000
   RecursosControlador: {fileID: 0}
+  Renderer: {fileID: 7813407022179686415}
 --- !u!61 &6937922464278269918
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -141,7 +142,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.0064436197, y: 0.01288712}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -151,5 +152,5 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1.2964065, y: 1.2577446}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0

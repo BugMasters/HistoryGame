@@ -17,6 +17,7 @@ public class JogadorScript : MonoBehaviour
     void Update()
     {
         Movimentacao();
+        Animacao();
     }
 
     #region :: Eventos ::
@@ -32,32 +33,33 @@ public class JogadorScript : MonoBehaviour
 
         Vector2 moveDir = new Vector2(MoveX, MoveY).normalized;
         Rigid.MovePosition(Rigid.position + moveDir * Velocidade * Time.deltaTime);
+    }
 
+    void Animacao()
+    {
         AnimacaoMovimento.SetBool("LadoWalk", false);
         AnimacaoMovimento.SetBool("CimaWalk", false);
         AnimacaoMovimento.SetBool("BaixoWalk", false);
 
-        if (MoveX > 0)
+        if (Input.GetKey(KeyCode.D))
         {
             transform.eulerAngles = new Vector3(0f, 0f);
             AnimacaoMovimento.SetBool("LadoWalk", true);
         }
-        else if (MoveX < 0)
+        else if (Input.GetKey(KeyCode.A))
         {
             transform.eulerAngles = new Vector3(0f, 180f);
             AnimacaoMovimento.SetBool("LadoWalk", true);
         }
-        else if (MoveY > 0)
+        else if (Input.GetKey(KeyCode.W))
         {
             AnimacaoMovimento.SetBool("CimaWalk", true);
         }
-        else if (MoveY < 0)
+        else if (Input.GetKey(KeyCode.S))
         {
             AnimacaoMovimento.SetBool("BaixoWalk", true);
         }
     }
-
-
 
     #endregion :: Métodos ::
 }
