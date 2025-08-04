@@ -7,7 +7,7 @@ public class ColetaveisScript : MonoBehaviour
     private Sprite[] Sprites; // Com recurso, sem recurso.
 
     [SerializeField]
-    private string Recurso; // Representa o recurso do objeto que receber esse script
+    private int Recurso; // Representa o recurso do objeto que receber esse script
 
     [SerializeField]
     private int[] Quantidade; // Reprensenta o quanto de itens esse recurso pode droppar.

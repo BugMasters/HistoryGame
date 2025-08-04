@@ -20,17 +20,17 @@ public class RecursosScript : MonoBehaviour
         Atualizar();
     }
 
-    public void RecursoColetado(string pNomeRecurso, int pQuantidade)
+    public void RecursoColetado(int pIdRecurso, int pQuantidade)
     {
-        switch (pNomeRecurso)
+        switch (pIdRecurso)
         {
-            case "Frutas":
+            case 1:
                 Frutas += pQuantidade;
                 break;
-            case "Madeira":
+            case 2:
                 Madeira += pQuantidade;
                 break;
-            case "Ferro":
+            case 3:
                 Ferro += pQuantidade;
                 break;
         }
