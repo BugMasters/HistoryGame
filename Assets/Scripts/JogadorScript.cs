@@ -6,17 +6,13 @@ public class JogadorScript : MonoBehaviour
     [SerializeField]
     private float Velocidade;
 
+    [SerializeField]
     private Rigidbody2D Rigid;
 
+    [SerializeField]
     private Animator AnimacaoMovimento;
 
     #endregion :: Atributos ::
-
-    void Start()
-    {
-        Rigid = GetComponent<Rigidbody2D>();
-        AnimacaoMovimento = GetComponent<Animator>();
-    }
 
     void Update()
     {

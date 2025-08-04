@@ -12,14 +12,7 @@ public class CameraScript : MonoBehaviour
     private float Velocidade = 0.125f;
 
     [SerializeField]
-    private bool Seguir;
-
-
-
-    void Start()
-    {
-        Seguir = true;
-    }
+    private bool Seguir = true;
 
     void LateUpdate() // Executa após o Update
     {

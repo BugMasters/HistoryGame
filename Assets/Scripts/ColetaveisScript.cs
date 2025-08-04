@@ -15,21 +15,11 @@ public class ColetaveisScript : MonoBehaviour
     [SerializeField]
     private RecursosScript RecursosControlador;
 
+    [SerializeField]
     private SpriteRenderer Renderer;
 
-    private bool Coletavel;
+    private bool Coletavel = true;
  
-    void Start()
-    {
-        Renderer = GetComponent<SpriteRenderer>();
-        Coletavel = true;
-    }
-
-    void Update()
-    {
-        
-    }
-
     void OnTriggerStay2D(Collider2D collision)
     {
         if(collision.CompareTag("Player"))
