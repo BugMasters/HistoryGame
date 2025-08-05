@@ -800,6 +800,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Arvore G
       objectReference: {fileID: 0}
+    - target: {fileID: 2156627699182262054, guid: e76d32ce2856c8d4ea941294cb87b573, type: 3}
+      propertyPath: m_SpriteSortPoint
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7119296622284582397, guid: e76d32ce2856c8d4ea941294cb87b573, type: 3}
       propertyPath: m_LocalPosition.x
       value: 11.181793
@@ -6747,17 +6751,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4931998816141468133, guid: 879297003336ffb4eb6128df8e47d0ec, type: 3}
+      propertyPath: m_SpriteSortPoint
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5659679764268408969, guid: 879297003336ffb4eb6128df8e47d0ec, type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 6873749965679330629, guid: 879297003336ffb4eb6128df8e47d0ec, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.02
+      value: 0.33
       objectReference: {fileID: 0}
     - target: {fileID: 6873749965679330629, guid: 879297003336ffb4eb6128df8e47d0ec, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.08
+      value: -0.13
       objectReference: {fileID: 0}
     - target: {fileID: 6873749965679330629, guid: 879297003336ffb4eb6128df8e47d0ec, type: 3}
       propertyPath: m_LocalPosition.z

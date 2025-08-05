@@ -28,12 +28,6 @@ public class JogadorScript : MonoBehaviour
         Rigid.MovePosition(MovePosition);
     }
 
-    #region :: Eventos ::
-
-    #endregion :: Eventos ::
-
-    #region :: Métodos ::
-
     void Movimentacao()
     {
         float MoveX = Input.GetAxisRaw("Horizontal");
@@ -52,8 +46,5 @@ public class JogadorScript : MonoBehaviour
         {
             Animator.SetBool("Walk", false);
         }
-
     }
-
-    #endregion :: Métodos ::
 }
