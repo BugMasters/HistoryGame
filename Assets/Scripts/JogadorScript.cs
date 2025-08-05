@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class JogadorScript : MonoBehaviour
 {
@@ -10,14 +11,21 @@ public class JogadorScript : MonoBehaviour
     private Rigidbody2D Rigid;
 
     [SerializeField]
-    private Animator AnimacaoMovimento;
+    private Animator Animator;
+
+    private Vector2 Position;
 
     #endregion :: Atributos ::
 
     void Update()
     {
         Movimentacao();
-        Animacao();
+    }
+
+    void FixedUpdate()
+    {
+        Vector3 MovePosition = (Velocidade * Time.fixedDeltaTime * Position.normalized) + Rigid.position;
+        Rigid.MovePosition(MovePosition);
     }
 
     #region :: Eventos ::
@@ -31,34 +39,20 @@ public class JogadorScript : MonoBehaviour
         float MoveX = Input.GetAxisRaw("Horizontal");
         float MoveY = Input.GetAxisRaw("Vertical");
 
-        Vector2 moveDir = new Vector2(MoveX, MoveY).normalized;
-        Rigid.MovePosition(Rigid.position + moveDir * Velocidade * Time.deltaTime);
-    }
+        Position = new Vector2(MoveX, MoveY);
 
-    void Animacao()
-    {
-        AnimacaoMovimento.SetBool("LadoWalk", false);
-        AnimacaoMovimento.SetBool("CimaWalk", false);
-        AnimacaoMovimento.SetBool("BaixoWalk", false);
+        if(Position != Vector2.zero)
+        {
+            Animator.SetFloat("Horizontal", MoveX);
+            Animator.SetFloat("Vertical", MoveY);
 
-        if (Input.GetKey(KeyCode.D))
-        {
-            transform.eulerAngles = new Vector3(0f, 0f);
-            AnimacaoMovimento.SetBool("LadoWalk", true);
+            Animator.SetBool("Walk", true);
         }
-        else if (Input.GetKey(KeyCode.A))
+        else
         {
-            transform.eulerAngles = new Vector3(0f, 180f);
-            AnimacaoMovimento.SetBool("LadoWalk", true);
+            Animator.SetBool("Walk", false);
         }
-        else if (Input.GetKey(KeyCode.W))
-        {
-            AnimacaoMovimento.SetBool("CimaWalk", true);
-        }
-        else if (Input.GetKey(KeyCode.S))
-        {
-            AnimacaoMovimento.SetBool("BaixoWalk", true);
-        }
+
     }
 
     #endregion :: Métodos ::
