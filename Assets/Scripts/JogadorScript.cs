@@ -13,7 +13,12 @@ public class JogadorScript : MonoBehaviour
     [SerializeField]
     private Animator Animator;
 
+    [SerializeField]
+    private GameObject HUD;
+
     private Vector2 Position;
+
+    public GameObject[] Inventario;
 
     #endregion :: Atributos ::
 

@@ -4,16 +4,16 @@ public class RecursosScript : MonoBehaviour
 {
     // Conforme o jogo for crescendo, basta adicionar um novo recurso aqui
     [SerializeField]
-    private int Frutas = 0;
+    public int Frutas = 0;
 
     [SerializeField] 
-    private int Madeira = 0;
+    public int Madeira = 0;
 
     [SerializeField]
-    private int Ferro = 0;
+    public int Ferro = 0;
 
     [SerializeField]
-    private RecursosHUD Hud;
+    public RecursosHUD Hud;
 
     void Start()
     {
@@ -32,6 +32,24 @@ public class RecursosScript : MonoBehaviour
                 break;
             case 3:
                 Ferro += pQuantidade;
+                break;
+        }
+
+        Atualizar();
+    }
+
+    public void RecursosUtilizado(int pIdRecurso, int pQuantidade)
+    {
+        switch (pIdRecurso)
+        {
+            case 1:
+                Frutas -= pQuantidade;
+                break;
+            case 2:
+                Madeira -= pQuantidade;
+                break;
+            case 3:
+                Ferro -= pQuantidade;
                 break;
         }
 
