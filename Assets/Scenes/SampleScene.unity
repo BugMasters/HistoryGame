@@ -2937,7 +2937,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Painel: {fileID: 52482322}
   Recursos: {fileID: 1430320156}
-  Player: {fileID: 0}
+  Player: {fileID: 1236882551}
 --- !u!61 &1198440799
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2984,6 +2984,17 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 0.7299218}
   m_EdgeRadius: 0
+--- !u!114 &1236882551 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7206041152221579283, guid: 879297003336ffb4eb6128df8e47d0ec, type: 3}
+  m_PrefabInstance: {fileID: 906925827786457791}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c57abe3bd2e94e44894a6022c96de5dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1327401416
 GameObject:
   m_ObjectHideFlags: 0
