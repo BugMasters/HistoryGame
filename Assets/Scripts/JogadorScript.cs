@@ -16,6 +16,8 @@ public class JogadorScript : MonoBehaviour
     [SerializeField]
     private GameObject HUD;
 
+    private bool Move = true;
+
     private Vector2 Position;
 
     public GameObject[] Inventario;
@@ -51,5 +53,10 @@ public class JogadorScript : MonoBehaviour
         {
             Animator.SetBool("Walk", false);
         }
+    }
+
+    public void CanMove()
+    {
+        Move = !Move;
     }
 }

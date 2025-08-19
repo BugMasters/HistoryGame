@@ -1,63 +1,62 @@
+using Assets.Scripts.Enum;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class RecursosScript : MonoBehaviour
+public class Inventario : MonoBehaviour
 {
-    // Conforme o jogo for crescendo, basta adicionar um novo recurso aqui
-    [SerializeField]
-    public int Frutas = 0;
+    private Dictionary<TipoRecurso, int> recursos = new Dictionary<TipoRecurso, int>()
+    {
+        { TipoRecurso.Fruta, 0 },
+        { TipoRecurso.Madeira, 0 },
+        { TipoRecurso.Ferro, 0 },
+        { TipoRecurso.Pedra, 0 }
+    };
 
     [SerializeField] 
-    public int Madeira = 0;
-
-    [SerializeField]
-    public int Ferro = 0;
-
-    [SerializeField]
-    public RecursosHUD Hud;
+    private RecursosHUD hud;
 
     void Start()
     {
-        Atualizar();
+        AtualizarHUD();
     }
 
-    public void RecursoColetado(int pIdRecurso, int pQuantidade)
+    public void Adicionar(TipoRecurso tipo, int quantidade)
     {
-        switch (pIdRecurso)
+        recursos[tipo] += quantidade;
+        AtualizarHUD();
+    }
+
+    public void Remover(TipoRecurso tipo, int quantidade)
+    {
+        recursos[tipo] = Mathf.Max(0, recursos[tipo] - quantidade);
+        AtualizarHUD();
+    }
+
+    public bool Possui(TipoRecurso tipo, int quantidade)
+    {
+        return recursos.ContainsKey(tipo) && recursos[tipo] >= quantidade;
+    }
+    
+    public bool PossuiTudo(Dictionary<TipoRecurso, int> receita)
+    {
+        foreach (var par in receita)
         {
-            case 1:
-                Frutas += pQuantidade;
-                break;
-            case 2:
-                Madeira += pQuantidade;
-                break;
-            case 3:
-                Ferro += pQuantidade;
-                break;
+            if (!Possui(par.Key, par.Value)) return false;
         }
-
-        Atualizar();
+        return true;
     }
 
-    public void RecursosUtilizado(int pIdRecurso, int pQuantidade)
+    public void Consumir(Dictionary<TipoRecurso, int> receita)
     {
-        switch (pIdRecurso)
+        foreach (var par in receita)
         {
-            case 1:
-                Frutas -= pQuantidade;
-                break;
-            case 2:
-                Madeira -= pQuantidade;
-                break;
-            case 3:
-                Ferro -= pQuantidade;
-                break;
+            Remover(par.Key, par.Value);
         }
-
-        Atualizar();
     }
 
-    private void Atualizar()
+    private void AtualizarHUD()
     {
-        Hud.Atualizar(Madeira, Frutas);
+        // Exemplo: passa os recursos pro HUD
+        hud.Atualizar(recursos);
     }
 }

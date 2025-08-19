@@ -1,3 +1,4 @@
+using Assets.Scripts.Enum;
 using System;
 using UnityEngine;
 
@@ -7,13 +8,13 @@ public class ColetaveisScript : MonoBehaviour
     private Sprite[] Sprites; // Com recurso, sem recurso.
 
     [SerializeField]
-    private int Recurso; // Representa o recurso do objeto que receber esse script
+    private TipoRecurso TipoRecurso; // Representa o recurso do objeto que receber esse script
 
     [SerializeField]
     private int[] Quantidade; // Reprensenta o quanto de itens esse recurso pode droppar.
 
     [SerializeField]
-    private RecursosScript RecursosControlador;
+    private Inventario RecursosControlador;
 
     [SerializeField]
     private SpriteRenderer Renderer;
@@ -28,7 +29,7 @@ public class ColetaveisScript : MonoBehaviour
             {
                 Renderer.sprite = Sprites[1];
                 Coletavel = false;
-                RecursosControlador.RecursoColetado(Recurso, QuantidadeColetada());
+                RecursosControlador.Adicionar(TipoRecurso, QuantidadeColetada());
             }
         }
     }

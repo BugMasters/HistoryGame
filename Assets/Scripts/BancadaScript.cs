@@ -1,33 +1,67 @@
-using System.Linq;
+using Assets.Scripts.Interface;
+using Assets.Scripts.Model;
 using UnityEngine;
-using static UnityEngine.Rendering.DebugUI;
 
 public class BancadaScript : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject Painel;
+    [SerializeField] 
+    private GameObject painel;
+
+    [SerializeField] 
+    private Inventario inventario;
+
+    [SerializeField] 
+    private JogadorScript player;
 
     [SerializeField]
-    private RecursosScript Recursos;
+    private ListaFerramentas listaFerramentas;
 
     [SerializeField]
-    private JogadorScript Player;
+    private ListaConstrucoes listaConstrucoes;
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (Input.GetKey(KeyCode.E))
+        if (collision.collider.CompareTag("Player"))
         {
-            Painel.SetActive(!Painel.activeSelf);
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                painel.SetActive(!painel.activeSelf);
+                player.CanMove();
+            }
+
+            if (painel.activeSelf && Input.GetKeyDown(KeyCode.Escape))
+            {
+                painel.SetActive(false);
+                player.CanMove();
+            }
         }
     }
 
-    public void FabricarMachado()
+    public void FabricarFerramenta(int IdFerramenta)
     {
-        if(Recursos.Madeira >= 2)
-        {
-            Recursos.RecursosUtilizado(2, 2);
+        IFerramenta ferramenta = listaFerramentas.GetFerramenta(IdFerramenta);
 
-            Player.Inventario.Append(new GameObject("Machado"));
+        if (inventario.PossuiTudo(ferramenta.Receita))
+        {
+            inventario.Consumir(ferramenta.Receita);
         }
     }
+
+    public void FabricarConstrucao(int IdConstrucao)
+    {
+        IConstrucoes construcao = listaConstrucoes.GetConstrucaoPrefab(IdConstrucao);
+
+        if (inventario.PossuiTudo(construcao.Receita))
+        {
+            inventario.Consumir(construcao.Receita);
+
+            painel.SetActive(false);
+            player.CanMove();
+
+            // Instancia a construção
+            GameObject go = Instantiate(construcao.Prefab, player.transform.position, Quaternion.identity);
+            go.GetComponent<ConstrucaoScript>().AtivarModoColocacao();
+        }
+    }
+
 }
