@@ -1,23 +1,22 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using System.Collections.Generic;
+using System.Linq;
 
 public class ListaConstrucoes : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject cabanaPrefab;
+    [SerializeField] 
+    private List<ConstrucaoDef> construcoes;
 
-    private Dictionary<int, GameObject> construcoes;
+    private Dictionary<int, ConstrucaoDef> mapa;
 
     void Awake()
     {
-        construcoes = new Dictionary<int, GameObject>()
+        mapa = new Dictionary<int, ConstrucaoDef>();
+        for (int i = 0; i < construcoes.Count; i++)
         {
-            { 1, cabanaPrefab }
-        };
+            mapa[i + 1] = construcoes[i];
+        }
     }
 
-    public GameObject GetConstrucaoPrefab(int id)
-    {
-        return construcoes[id];
-    }
+    public IConstrucoes GetConstrucao(int id) => mapa[id];
 }

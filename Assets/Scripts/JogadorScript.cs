@@ -26,7 +26,10 @@ public class JogadorScript : MonoBehaviour
 
     void Update()
     {
-        Movimentacao();
+        if (Move)
+        {
+            Movimentacao();
+        }
     }
 
     void FixedUpdate()

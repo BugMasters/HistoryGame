@@ -47,21 +47,25 @@ public class BancadaScript : MonoBehaviour
         }
     }
 
-    public void FabricarConstrucao(int IdConstrucao)
+    public void FabricarConstrucao(int idConstrucao)
     {
-        IConstrucoes construcao = listaConstrucoes.GetConstrucaoPrefab(IdConstrucao);
+        IConstrucoes def = listaConstrucoes.GetConstrucao(idConstrucao);
 
-        if (inventario.PossuiTudo(construcao.Receita))
+        if (inventario.PossuiTudo(def.Receita))
         {
-            inventario.Consumir(construcao.Receita);
+            inventario.Consumir(def.Receita);
 
             painel.SetActive(false);
             player.CanMove();
 
-            // Instancia a construção
-            GameObject go = Instantiate(construcao.Prefab, player.transform.position, Quaternion.identity);
-            go.GetComponent<ConstrucaoScript>().AtivarModoColocacao();
+            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            mousePos.z = 0f;
+
+            GameObject go = Instantiate(def.Prefab, mousePos, Quaternion.identity);
+        }
+        else
+        {
+            Debug.Log("Recursos insuficientes");
         }
     }
-
 }

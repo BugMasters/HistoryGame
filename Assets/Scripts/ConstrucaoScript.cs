@@ -2,29 +2,22 @@ using UnityEngine;
 
 public class ConstrucaoScript : MonoBehaviour
 {
-    private bool canMove = false;
+    private bool canMove = true;
+
 
     void Update()
     {
-        if (canMove)
+        if (!canMove)
         {
-            Mover();
-            if (Input.GetMouseButtonDown(0))
-            {
-                canMove = false;
-            }
+            return;
+        }
+
+        transform.position = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            canMove = false;
         }
     }
-
-    public void AtivarModoColocacao()
-    {
-        canMove = true;
-    }
-
-    void Mover()
-    {
-        Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        pos.z = 0;
-        transform.position = pos;
-    }
 }
+
