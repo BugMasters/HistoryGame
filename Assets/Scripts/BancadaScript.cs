@@ -19,9 +19,17 @@ public class BancadaScript : MonoBehaviour
     [SerializeField]
     private ListaConstrucoes listaConstrucoes;
 
-    private void OnCollisionStay2D(Collision2D collision)
+    [SerializeField]
+    private Sprite[] Sprites;
+
+    [SerializeField]
+    private SpriteRenderer spriteRenderer;
+
+    void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.collider.CompareTag("Player"))
+        spriteRenderer.sprite = Sprites[1];
+
+        if (collision.CompareTag("Player"))
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
@@ -35,6 +43,11 @@ public class BancadaScript : MonoBehaviour
                 player.CanMove();
             }
         }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        spriteRenderer.sprite = Sprites[0];
     }
 
     public void FabricarFerramenta(int IdFerramenta)
