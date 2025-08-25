@@ -4,7 +4,6 @@ public class ConstrucaoScript : MonoBehaviour
 {
     private bool canMove = true;
 
-
     void Update()
     {
         if (!canMove)

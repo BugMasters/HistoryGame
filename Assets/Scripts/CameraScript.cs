@@ -5,7 +5,7 @@ public class CameraScript : MonoBehaviour
     [SerializeField]
     private Transform Player;
 
-    void LateUpdate() // Executa após o Update
+    void LateUpdate()
     {
         SeguirPlayer();
     }

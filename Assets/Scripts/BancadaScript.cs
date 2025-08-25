@@ -10,9 +10,6 @@ public class BancadaScript : MonoBehaviour
     [SerializeField] 
     private Inventario inventario;
 
-    [SerializeField] 
-    private JogadorScript player;
-
     [SerializeField]
     private ListaFerramentas listaFerramentas;
 
@@ -25,29 +22,42 @@ public class BancadaScript : MonoBehaviour
     [SerializeField]
     private SpriteRenderer spriteRenderer;
 
-    void OnTriggerStay2D(Collider2D collision)
+    private bool PlayerPerto = false;
+
+    void Update()
+    {
+        UsarBancada();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         spriteRenderer.sprite = Sprites[1];
 
         if (collision.CompareTag("Player"))
         {
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                painel.SetActive(!painel.activeSelf);
-                player.CanMove();
-            }
-
-            if (painel.activeSelf && Input.GetKeyDown(KeyCode.Escape))
-            {
-                painel.SetActive(false);
-                player.CanMove();
-            }
+            PlayerPerto = true;
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         spriteRenderer.sprite = Sprites[0];
+    }
+
+    void UsarBancada()
+    {
+        if (PlayerPerto)
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                painel.SetActive(!painel.activeSelf);
+            }
+
+            if (painel.activeSelf && Input.GetKeyDown(KeyCode.Escape))
+            {
+                painel.SetActive(false);
+            }
+        }
     }
 
     public void FabricarFerramenta(int IdFerramenta)
@@ -69,7 +79,6 @@ public class BancadaScript : MonoBehaviour
             inventario.Consumir(def.Receita);
 
             painel.SetActive(false);
-            player.CanMove();
 
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             mousePos.z = 0f;

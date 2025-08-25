@@ -15,7 +15,7 @@ public class Inventario : MonoBehaviour
     [SerializeField] 
     private RecursosHUD hud;
 
-    void Start()
+    void Awake()
     {
         AtualizarHUD();
     }
@@ -56,7 +56,6 @@ public class Inventario : MonoBehaviour
 
     private void AtualizarHUD()
     {
-        // Exemplo: passa os recursos pro HUD
         hud.Atualizar(recursos);
     }
 }

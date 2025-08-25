@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.Windows;
 
 public class JogadorScript : MonoBehaviour
 {
@@ -16,11 +16,13 @@ public class JogadorScript : MonoBehaviour
     [SerializeField]
     private GameObject HUD;
 
-    private bool Move = true;
-
     private Vector2 Position;
 
     public GameObject[] Inventario;
+
+    private bool Move = true;
+
+    private bool InHud = false;
 
     #endregion :: Atributos ::
 
@@ -40,8 +42,8 @@ public class JogadorScript : MonoBehaviour
 
     void Movimentacao()
     {
-        float MoveX = Input.GetAxisRaw("Horizontal");
-        float MoveY = Input.GetAxisRaw("Vertical");
+        float MoveX = UnityEngine.Input.GetAxisRaw("Horizontal");
+        float MoveY = UnityEngine.Input.GetAxisRaw("Vertical");
 
         Position = new Vector2(MoveX, MoveY);
 
@@ -55,6 +57,24 @@ public class JogadorScript : MonoBehaviour
         else
         {
             Animator.SetBool("Walk", false);
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Bancada"))
+        {
+            if (UnityEngine.Input.GetKeyDown(KeyCode.E))
+            {
+                InHud = true;
+                CanMove();
+            }
+
+            if (HUD.activeSelf && UnityEngine.Input.GetKeyDown(KeyCode.Escape))
+            {
+                InHud = false;
+                CanMove();
+            }
         }
     }
 

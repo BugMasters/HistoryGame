@@ -20,17 +20,37 @@ public class ColetaveisScript : MonoBehaviour
     private SpriteRenderer Renderer;
 
     private bool Coletavel = true;
- 
-    void OnTriggerStay2D(Collider2D collision)
+
+    private bool PlayerPerto = false;
+
+    private void Update()
+    {
+        Coletar();
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.CompareTag("Player"))
         {
-            if (Coletavel && Input.GetKeyDown(KeyCode.E))
-            {
-                Renderer.sprite = Sprites[1];
-                Coletavel = false;
-                RecursosControlador.Adicionar(TipoRecurso, QuantidadeColetada());
-            }
+            PlayerPerto = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            PlayerPerto = false;
+        }
+    }
+
+    private void Coletar()
+    {
+        if (PlayerPerto && Coletavel && Input.GetKeyDown(KeyCode.E))
+        {
+            Renderer.sprite = Sprites[1];
+            Coletavel = false;
+            RecursosControlador.Adicionar(TipoRecurso, QuantidadeColetada());
         }
     }
 
