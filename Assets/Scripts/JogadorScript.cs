@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Windows;
 
 public class JogadorScript : MonoBehaviour
@@ -12,9 +13,6 @@ public class JogadorScript : MonoBehaviour
 
     [SerializeField]
     private Animator Animator;
-
-    [SerializeField]
-    private GameObject HUD;
 
     private Vector2 Position;
 
@@ -32,6 +30,8 @@ public class JogadorScript : MonoBehaviour
         {
             Movimentacao();
         }
+
+        Hud();
     }
 
     void FixedUpdate()
@@ -60,26 +60,31 @@ public class JogadorScript : MonoBehaviour
         }
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Bancada"))
         {
-            if (UnityEngine.Input.GetKeyDown(KeyCode.E))
-            {
-                InHud = true;
-                CanMove();
-            }
-
-            if (HUD.activeSelf && UnityEngine.Input.GetKeyDown(KeyCode.Escape))
-            {
-                InHud = false;
-                CanMove();
-            }
+            InHud = true;
         }
     }
 
-    public void CanMove()
+    void OnTriggerExit2D(Collider2D collision)
     {
-        Move = !Move;
+        if (collision.CompareTag("Bancada"))
+        {
+            InHud = false;
+        }
+    }
+
+    private void Hud()
+    {
+        if (InHud && UnityEngine.Input.GetKey(KeyCode.E))
+        {
+            Move = false;
+        }
+        else if (InHud && UnityEngine.Input.GetKey(KeyCode.Escape))
+        {
+            Move = true;
+        }
     }
 }

@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 3823361097979337577}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 17.5, y: -0.089999914, z: -11.853138}
+  m_LocalPosition: {x: 17.5, y: -0.089999914, z: 7}
   m_LocalScale: {x: 0.89393, y: 0.89393, z: 0.89393}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -150,7 +150,7 @@ MonoBehaviour:
   Sprites:
   - {fileID: -2471641787934989564, guid: 4721fc45a390b50448da51d2f11102c7, type: 3}
   - {fileID: -6560600229902304855, guid: 0b07fea175c24a84f8c26ddc6064c662, type: 3}
-  Recurso: 2
+  TipoRecurso: 0
   Quantidade: 0100000004000000
   RecursosControlador: {fileID: 0}
   Renderer: {fileID: 919346938951221129}

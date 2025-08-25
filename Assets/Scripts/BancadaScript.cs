@@ -42,6 +42,11 @@ public class BancadaScript : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         spriteRenderer.sprite = Sprites[0];
+
+        if (collision.CompareTag("Player"))
+        {
+            PlayerPerto = false;
+        }
     }
 
     void UsarBancada()
@@ -84,10 +89,6 @@ public class BancadaScript : MonoBehaviour
             mousePos.z = 0f;
 
             GameObject go = Instantiate(def.Prefab, mousePos, Quaternion.identity);
-        }
-        else
-        {
-            Debug.Log("Recursos insuficientes");
         }
     }
 }
