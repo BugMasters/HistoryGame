@@ -22,6 +22,9 @@ public class BancadaScript : MonoBehaviour
     [SerializeField]
     private SpriteRenderer spriteRenderer;
 
+    [SerializeField]
+    private JogadorScript Player;
+
     private bool PlayerPerto = false;
 
     void Update()
