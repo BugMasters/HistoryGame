@@ -10,7 +10,6 @@ namespace Assets.Scripts.Model
 {
     public class ListaPaginas : MonoBehaviour
     {
-        [SerializeField]
-        public List<Pagina> ListPaginas;
+        [SerializeField] public List<Pagina> ListPaginas;
     }
 }
