@@ -7,6 +7,9 @@ namespace Assets.Scripts
         [SerializeField]
         private GameObject Livro;
 
+        [SerializeField]
+        private GameObject Etiqueta;
+
         private bool InHud = false;
 
         void Update()
@@ -21,11 +24,13 @@ namespace Assets.Scripts
                 if (InHud)
                 {
                     Livro.SetActive(false);
+                    Etiqueta.SetActive(false);
                     InHud = false;
                 }
                 else
                 {
                     Livro.SetActive(true);
+                    Etiqueta.SetActive(true);
                     InHud = true;
                 }
             }
@@ -33,6 +38,7 @@ namespace Assets.Scripts
             if (InHud && Input.GetKeyDown(KeyCode.Escape))
             {
                 Livro.SetActive(false);
+                Etiqueta.SetActive(false);
             }
         }
     }

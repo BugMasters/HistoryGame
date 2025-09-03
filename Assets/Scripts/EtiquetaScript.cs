@@ -1,9 +1,11 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.Enum;
+using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace Assets.Scripts
 {
-    public class EtiquetaScript : MonoBehaviour
+    public class EtiquetaScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
     {
         [SerializeField]
         private Sprite[] Sprites;
@@ -17,37 +19,66 @@ namespace Assets.Scripts
         [SerializeField]
         private EtiquetaScript[] Etiquetas;
 
+        [SerializeField]
+        private TipoInformacao Tipo;
+
+        private RectTransform rect;
+
         private Vector2 PosicaoInicial;
+
+        private Vector2 PosicaoAtivado;
+
+        private Vector2 PosicaoAMover;
+
+        private bool Ativado = false;
 
         void Awake()
         {
-            PosicaoInicial = transform.position;
+            rect = GetComponent<RectTransform>();
+            PosicaoInicial = rect.anchoredPosition;
+            PosicaoAtivado = new Vector2(rect.anchoredPosition.x + 5f, rect.anchoredPosition.y);
         }
 
-        void OnMouseEnter()
+        void Mover()
+        {
+            rect.anchoredPosition = PosicaoAMover;
+        }
+
+        public void OnPointerEnter(PointerEventData eventData)
         {
             Icone.sprite = Sprites[1];
         }
 
-        void OnMouseExit()
+        public void OnPointerExit(PointerEventData eventData)
         {
-            Icone.sprite = Sprites[0];   
+            Icone.sprite = Sprites[0];
         }
 
-        void OnMouseDown()
+        public void OnPointerClick(PointerEventData eventData)
         {
             Selecionado();
             VoltarEtiquetas();
+            Livro.AlterarPrefacio(Tipo);
         }
 
         private void Selecionado()
         {
-            transform.position = Vector2.MoveTowards(PosicaoInicial, new Vector2(52, PosicaoInicial.y), 3f);
+            if (!Ativado)
+            {
+                PosicaoAMover = PosicaoAtivado;
+                Ativado = true;
+                Mover();
+            }
         }
 
         public void Voltar()
         {
-            transform.position = Vector2.MoveTowards(transform.position, PosicaoInicial, 3f);
+            if (Ativado)
+            {
+                PosicaoAMover = PosicaoInicial;
+                Ativado = false;
+                Mover();
+            }
         }
 
         private void VoltarEtiquetas()

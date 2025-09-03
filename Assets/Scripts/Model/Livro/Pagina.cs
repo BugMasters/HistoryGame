@@ -32,5 +32,4 @@ namespace Assets.Scripts.Model.Livro
         public string Fato3 => fato3;
         public TipoInformacao Tipo => tipo;
     }
-
 }

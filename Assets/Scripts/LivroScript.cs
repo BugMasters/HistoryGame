@@ -50,11 +50,13 @@ public class LivroScript : MonoBehaviour
 
     #endregion
 
+    private bool EhPagina = false;
+
     private int PaginaAtual = 0;
 
     void OnEnable()
     {
-        AlterarPagina();
+        AlterarPrefacio(TipoInformacao.Construcao);
     }
 
     void Update()
@@ -140,6 +142,7 @@ public class LivroScript : MonoBehaviour
 
     private void AlterarPagina()
     {
+        EhPagina = true;
         Pagina.SetActive(false);
         AtualizarDadosPagina();
         PlayAnimationOnce();
@@ -147,13 +150,22 @@ public class LivroScript : MonoBehaviour
 
     public void AlterarPrefacio(TipoInformacao Tipo)
     {
+        EhPagina = false;
         Prefacio.SetActive(false);
+        AtualizarListaAuxiliar(Tipo);
         AtualizarDadosPrefacio();
         PlayAnimationOnce();
     }
 
     private void TerminouAnimacao()
     {
-        Pagina.SetActive(true);
+        if (EhPagina)
+        {
+            Pagina.SetActive(true);
+        }
+        else
+        {
+            Prefacio.SetActive(true);
+        }
     }
 }
