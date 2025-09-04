@@ -27,6 +27,9 @@ public class LivroScript : MonoBehaviour
     [SerializeField]
     private Sprite Desconhecido;
 
+    [SerializeField]
+    private TextMeshProUGUI TextoPaginaAtual;
+
     #region :: Dados da Página ::
 
     [Header("Infos da Página")]
@@ -102,9 +105,9 @@ public class LivroScript : MonoBehaviour
 
     private void AtualizarDadosPrefacio()
     {
-        for (int i = 0; i < Icones.Count(); i++)
+        for (int i = 0; i < Icones.Length; i++)
         {
-            if(ListaAuxiliar.Count >= i)
+            if(ListaAuxiliar.Count() >= i + 1)
             {
                 if (ListaAuxiliar[i].Liberado)
                 {
@@ -154,7 +157,13 @@ public class LivroScript : MonoBehaviour
         Prefacio.SetActive(false);
         AtualizarListaAuxiliar(Tipo);
         AtualizarDadosPrefacio();
+        AlterarTituloPrefacio(Tipo);
         PlayAnimationOnce();
+    }
+
+    private void AlterarTituloPrefacio(TipoInformacao Tipo)
+    {
+        TextoPaginaAtual.text = Tipo.ToString();
     }
 
     private void TerminouAnimacao()
