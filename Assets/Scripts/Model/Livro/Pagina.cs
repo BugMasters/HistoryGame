@@ -8,7 +8,6 @@ namespace Assets.Scripts.Model.Livro
     [CreateAssetMenu(fileName = "Livro", menuName = "Livro/NovaPagina")]
     public class Pagina : ScriptableObject
     {
-        [SerializeField] private int numPagina;
         [SerializeField] private bool liberado;
         [SerializeField] private Sprite icone;
         [SerializeField] private TipoInformacao tipo;
@@ -22,7 +21,6 @@ namespace Assets.Scripts.Model.Livro
         [TextArea][SerializeField] private string fato2;
         [TextArea][SerializeField] private string fato3;
 
-        public int NumPagina => numPagina;
         public bool Liberado => liberado;
         public Sprite Icone => icone;
         public string Nome => nome;

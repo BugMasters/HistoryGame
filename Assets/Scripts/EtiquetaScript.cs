@@ -37,6 +37,11 @@ namespace Assets.Scripts
             rect = GetComponent<RectTransform>();
             PosicaoInicial = rect.anchoredPosition;
             PosicaoAtivado = new Vector2(rect.anchoredPosition.x + 5f, rect.anchoredPosition.y);
+
+            if(Tipo == TipoInformacao.Construcao)
+            {
+                Selecionado();
+            }
         }
 
         void Mover()
@@ -56,19 +61,19 @@ namespace Assets.Scripts
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            Selecionado();
-            VoltarEtiquetas();
-            Livro.AlterarPrefacio(Tipo);
+            if (!Ativado)
+            {
+                Selecionado();
+                VoltarEtiquetas();
+                Livro.AlterarPrefacio(Tipo);
+            }
         }
 
         private void Selecionado()
         {
-            if (!Ativado)
-            {
-                PosicaoAMover = PosicaoAtivado;
-                Ativado = true;
-                Mover();
-            }
+            PosicaoAMover = PosicaoAtivado;
+            Ativado = true;
+            Mover();
         }
 
         public void Voltar()

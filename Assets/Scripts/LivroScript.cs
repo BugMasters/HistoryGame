@@ -46,6 +46,7 @@ public class LivroScript : MonoBehaviour
 
     [SerializeField] private Image[] Icones;
     [SerializeField] private TextMeshProUGUI[] Titulos;
+    [SerializeField] private GameObject[] Molduras;
 
     private List<Pagina> ListaAuxiliar;
 
@@ -59,6 +60,7 @@ public class LivroScript : MonoBehaviour
 
     void OnEnable()
     {
+        Pagina.SetActive(false);
         AlterarPrefacio(TipoInformacao.Construcao);
     }
 
@@ -95,19 +97,19 @@ public class LivroScript : MonoBehaviour
 
     private void AtualizarDadosPagina()
     {
-        Icone.sprite = Paginas.ListPaginas[PaginaAtual].Icone;
-        Titulo.text = Paginas.ListPaginas[PaginaAtual].Nome;
-        Descricao.text = Paginas.ListPaginas[PaginaAtual].Descricao;
-        Fato1.text = Paginas.ListPaginas[PaginaAtual].Fato1;
-        Fato2.text = Paginas.ListPaginas[PaginaAtual].Fato2;
-        Fato3.text = Paginas.ListPaginas[PaginaAtual].Fato3;
+        Icone.sprite = ListaAuxiliar[PaginaAtual].Icone;
+        Titulo.text = ListaAuxiliar[PaginaAtual].Nome;
+        Descricao.text = ListaAuxiliar[PaginaAtual].Descricao;
+        Fato1.text = ListaAuxiliar[PaginaAtual].Fato1;
+        Fato2.text = ListaAuxiliar[PaginaAtual].Fato2;
+        Fato3.text = ListaAuxiliar[PaginaAtual].Fato3;
     }
 
     private void AtualizarDadosPrefacio()
     {
         for (int i = 0; i < Icones.Length; i++)
         {
-            if(ListaAuxiliar.Count() >= i + 1)
+            if(ListaAuxiliar.Count >= i + 1)
             {
                 if (ListaAuxiliar[i].Liberado)
                 {
@@ -122,8 +124,7 @@ public class LivroScript : MonoBehaviour
             }
             else
             {
-                Icones[i].sprite = Desconhecido;
-                Titulos[i].text = "???";
+                Molduras[i].SetActive(false);
             }
         }
     }
@@ -143,6 +144,13 @@ public class LivroScript : MonoBehaviour
         }
     }
 
+    public void AlterarDePrefacioParaPagina(int pNumPagina)
+    {
+        PaginaAtual = pNumPagina + AuxIndice;
+        Prefacio.SetActive(false);
+        AlterarPagina();
+    }
+
     private void AlterarPagina()
     {
         EhPagina = true;
@@ -155,6 +163,7 @@ public class LivroScript : MonoBehaviour
     {
         EhPagina = false;
         Prefacio.SetActive(false);
+        Pagina.SetActive(false);
         AtualizarListaAuxiliar(Tipo);
         AtualizarDadosPrefacio();
         AlterarTituloPrefacio(Tipo);
@@ -163,7 +172,18 @@ public class LivroScript : MonoBehaviour
 
     private void AlterarTituloPrefacio(TipoInformacao Tipo)
     {
-        TextoPaginaAtual.text = Tipo.ToString();
+        switch (Tipo)
+        {
+            case TipoInformacao.Construcao:
+                TextoPaginaAtual.text = "Construções";
+                break;
+            case TipoInformacao.Ferramenta:
+                TextoPaginaAtual.text = "Ferramentas";
+                break;
+            case TipoInformacao.Recurso:
+                TextoPaginaAtual.text = "Recursos";
+                break;
+        }
     }
 
     private void TerminouAnimacao()
