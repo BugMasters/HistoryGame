@@ -151,55 +151,6 @@ public class LivroScript : MonoBehaviour
         }
     }
 
-    #endregion
-
-    private void TrocarPagina()
-    {
-        if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            if(PaginaAtual < Paginas.ListPaginas.Count - 1)
-            {
-                PaginaAtual++;
-                AlterarPagina();
-            }
-
-            if(PaginaAtual + 1 == Paginas.ListPaginas.Count)
-            {
-                Setas[1].SetActive(false);
-            }
-            else
-            {
-                Setas[1].SetActive(true);
-            }
-        }
-
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            if(PaginaAtual > 0)
-            {
-                PaginaAtual--;
-                AlterarPagina();
-            }
-
-            if (PaginaAtual - 1 == 0)
-            {
-                Setas[1].SetActive(false);
-            }
-            else
-            {
-                Setas[1].SetActive(true);
-            }
-        }
-    }
-
-
-    public void AlterarDePrefacioParaPagina(int pNumPagina)
-    {
-        PaginaAtual = pNumPagina + AuxIndice;
-        Prefacio.SetActive(false);
-        AlterarPagina();
-    }
-
     public void AlterarPrefacio(TipoInformacao Tipo)
     {
         EhPagina = false;
@@ -210,6 +161,72 @@ public class LivroScript : MonoBehaviour
         AtualizarDadosPrefacio();
         AlterarTituloPrefacio(Tipo);
         PlayAnimationOnce();
+    }
+
+    #endregion
+
+    private void TrocarPagina()
+    {
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            if(PaginaAtual < Paginas.ListPaginas.Count - 1)
+            {
+                PaginaAtual++;
+                AlterarPaginaAtivada();
+            }
+
+            if(PaginaAtual + 1 == Paginas.ListPaginas.Count)
+            {
+                EstadoSetas(0, true);
+            }
+            else
+            {
+                EstadoSetas(0, false);
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            if(PaginaAtual > 0)
+            {
+                PaginaAtual--;
+                AlterarPaginaAtivada();
+            }
+
+            if (PaginaAtual - 1 == 0)
+            {
+                EstadoSetas(1, true);
+            }
+            else
+            {
+                EstadoSetas(1, false);
+            }
+        }
+    }
+
+    private void AlterarPaginaAtivada()
+    {
+        if (EhPagina)
+        {
+            AlterarPagina();
+        }
+        else
+        {
+            AlterarPrefacio(TipoAtual);
+        }
+    }
+
+    private void EstadoSetas(int Seta, bool Estado)
+    {
+        Setas[Seta].SetActive(Estado);
+    }
+
+
+    public void AlterarDePrefacioParaPagina(int pNumPagina)
+    {
+        PaginaAtual = pNumPagina + AuxIndice;
+        Prefacio.SetActive(false);
+        AlterarPagina();
     }
 
     private void AlterarTituloPrefacio(TipoInformacao Tipo)

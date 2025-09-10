@@ -514,7 +514,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &123426077
 RectTransform:
   m_ObjectHideFlags: 0
@@ -648,6 +648,9 @@ MonoBehaviour:
   - {fileID: 1484742555}
   - {fileID: 297706633}
   - {fileID: 1839760064}
+  Setas:
+  - {fileID: 1141637582}
+  - {fileID: 1930293451}
 --- !u!1 &125954935
 GameObject:
   m_ObjectHideFlags: 0
@@ -5797,7 +5800,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1171693391
 RectTransform:
   m_ObjectHideFlags: 0
