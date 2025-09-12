@@ -71,7 +71,7 @@ public class LivroScript : MonoBehaviour
         Pagina.SetActive(false);
         Setas[0].SetActive(false);
         Setas[1].SetActive(false);
-        AlterarPrefacio(TipoInformacao.Construcao);
+        AlterarEtiquetaPrefacio(TipoInformacao.Construcao);
     }
 
     void Update()
@@ -84,8 +84,6 @@ public class LivroScript : MonoBehaviour
         animator.SetTrigger("PlayOnce");
     }
 
-    #region :: Manipulação de Páginas ::
-
     private void AtualizarDadosPagina()
     {
         Icone.sprite = ListaAuxiliar[PaginaAtual].Icone;
@@ -96,28 +94,14 @@ public class LivroScript : MonoBehaviour
         Fato3.text = ListaAuxiliar[PaginaAtual].Fato3;
     }
 
-    private void AlterarPagina()
-    {
-        EhPagina = true;
-        Pagina.SetActive(false);
-        Setas[0].SetActive(false);
-        Setas[1].SetActive(false);
-        AtualizarDadosPagina();
-        PlayAnimationOnce();
-        Setas[0].SetActive(true);
-        Setas[1].SetActive(true);
-    }
-
-    #endregion
-
-    #region :: Manipulação de Prefácio ::
-
     private void AtualizarDadosPrefacio()
     {
         for (int i = 0; i < Icones.Length; i++)
         {
             if (ListaAuxiliar.Count >= i + 1)
             {
+                Molduras[i].SetActive(true);
+
                 if (ListaAuxiliar[i].Liberado)
                 {
                     Icones[i].sprite = ListaAuxiliar[i].Icone;
@@ -136,22 +120,15 @@ public class LivroScript : MonoBehaviour
         }
     }
 
-    private void AtualizarListaAuxiliar(TipoInformacao Tipo)
+    private void AlterarPagina()
     {
-        ListaAuxiliar = Paginas.ListPaginas.Where(p => p.Tipo == Tipo).ToList(); // Filtra pelo tipo
-
-        if (ListaAuxiliar.Count > PaginaAtual) // Verifica se ele possui itens, baseado na página de navegação do player
-        {
-            ListaAuxiliar = ListaAuxiliar.Skip(PaginaAtual).ToList();
-        }
-
-        if (ListaAuxiliar.Count >= 8) // Verifica se possui 8 ou mais itens
-        {
-            ListaAuxiliar = ListaAuxiliar.Take(8).ToList();
-        }
+        EhPagina = true;
+        Pagina.SetActive(false);
+        AtualizarDadosPagina();
+        PlayAnimationOnce();
     }
 
-    public void AlterarPrefacio(TipoInformacao Tipo)
+    public void AlterarEtiquetaPrefacio(TipoInformacao Tipo)
     {
         EhPagina = false;
         TipoAtual = Tipo;
@@ -163,43 +140,111 @@ public class LivroScript : MonoBehaviour
         PlayAnimationOnce();
     }
 
-    #endregion
+    public void AlterarDePrefacioParaPagina(int pNumPagina)
+    {
+        PaginaAtual = pNumPagina + AuxIndice;
+        Prefacio.SetActive(false);
+        AlterarPagina();
+        VerificaSetasAtivadas();
+    }
+
+    private bool VerificarTrocaPagina(bool Avancando)
+    {
+        if (EhPagina)
+        {
+            if(PaginaAtual < ListaAuxiliar.Count - 1)
+            {
+                if (Avancando)
+                {
+                    PaginaAtual++;
+                }
+                else
+                {
+                    PaginaAtual--;
+                }
+
+                return true;
+            }
+        }
+        else
+        {
+            if(Paginas.ListPaginas.Where(p => p.Tipo == TipoAtual).Count() > 8)
+            {
+                if (Avancando)
+                {
+                    PaginaAtual += 8;
+                }
+                else
+                {
+                    PaginaAtual -= 8;
+                }
+
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private void AtualizarListaAuxiliar(TipoInformacao Tipo)
+    {
+        ListaAuxiliar = Paginas.ListPaginas.Where(p => p.Tipo == Tipo).ToList(); // Filtra pelo tipo
+
+        if (ListaAuxiliar.Count >= 8) // Verifica se ele possui itens, baseado na página de navegação do player
+        {
+            ListaAuxiliar = ListaAuxiliar.Skip(PaginaAtual).ToList(); 
+        }
+
+        if (ListaAuxiliar.Count >= 8) // Verifica se possui 8 ou mais itens
+        {
+            ListaAuxiliar = ListaAuxiliar.Take(8).ToList();
+        }
+    }
 
     private void TrocarPagina()
     {
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            if(PaginaAtual < Paginas.ListPaginas.Count - 1)
+            if(VerificarTrocaPagina(true))
             {
-                PaginaAtual++;
                 AlterarPaginaAtivada();
             }
 
-            if(PaginaAtual + 1 == Paginas.ListPaginas.Count)
-            {
-                EstadoSetas(0, true);
-            }
-            else
-            {
-                EstadoSetas(0, false);
-            }
+            VerificaSetasAtivadas();
         }
 
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            if(PaginaAtual > 0)
+            if (VerificarTrocaPagina(true))
             {
-                PaginaAtual--;
                 AlterarPaginaAtivada();
             }
 
-            if (PaginaAtual - 1 == 0)
+            VerificaSetasAtivadas();
+        }
+    }
+
+    void VerificaSetasAtivadas()
+    {
+        if (ListaAuxiliar.Count > 1)
+        {
+            if(PaginaAtual > 0)
             {
                 EstadoSetas(1, true);
             }
             else
             {
                 EstadoSetas(1, false);
+            }
+
+
+            if (PaginaAtual != ListaAuxiliar.Count - 1)
+            {
+                EstadoSetas(0, true);
+            }
+            else
+            {
+                EstadoSetas(0, false);
             }
         }
     }
@@ -212,7 +257,7 @@ public class LivroScript : MonoBehaviour
         }
         else
         {
-            AlterarPrefacio(TipoAtual);
+            AlterarEtiquetaPrefacio(TipoAtual);
         }
     }
 
@@ -221,13 +266,6 @@ public class LivroScript : MonoBehaviour
         Setas[Seta].SetActive(Estado);
     }
 
-
-    public void AlterarDePrefacioParaPagina(int pNumPagina)
-    {
-        PaginaAtual = pNumPagina + AuxIndice;
-        Prefacio.SetActive(false);
-        AlterarPagina();
-    }
 
     private void AlterarTituloPrefacio(TipoInformacao Tipo)
     {

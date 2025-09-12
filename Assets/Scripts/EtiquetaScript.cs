@@ -65,7 +65,7 @@ namespace Assets.Scripts
             {
                 Selecionado();
                 VoltarEtiquetas();
-                Livro.AlterarPrefacio(Tipo);
+                Livro.AlterarEtiquetaPrefacio(Tipo);
             }
         }
 
