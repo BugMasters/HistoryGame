@@ -55,13 +55,6 @@ public class LivroScript : MonoBehaviour
     private TipoInformacao TipoAtual;
 
     #endregion
-
-    #region :: Setas ::
-
-    [SerializeField] private GameObject[] Setas;
-
-    #endregion
-
     private bool EhPagina = false;
 
     private int PaginaAtual = 0;
@@ -69,8 +62,6 @@ public class LivroScript : MonoBehaviour
     void OnEnable()
     {
         Pagina.SetActive(false);
-        Setas[0].SetActive(false);
-        Setas[1].SetActive(false);
         AlterarEtiquetaPrefacio(TipoInformacao.Construcao);
     }
 
@@ -145,7 +136,6 @@ public class LivroScript : MonoBehaviour
         PaginaAtual = pNumPagina + AuxIndice;
         Prefacio.SetActive(false);
         AlterarPagina();
-        VerificaSetasAtivadas();
     }
 
     private bool VerificarTrocaPagina(bool Avancando)
@@ -209,42 +199,13 @@ public class LivroScript : MonoBehaviour
             {
                 AlterarPaginaAtivada();
             }
-
-            VerificaSetasAtivadas();
         }
 
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            if (VerificarTrocaPagina(true))
+            if (VerificarTrocaPagina(false))
             {
                 AlterarPaginaAtivada();
-            }
-
-            VerificaSetasAtivadas();
-        }
-    }
-
-    void VerificaSetasAtivadas()
-    {
-        if (ListaAuxiliar.Count > 1)
-        {
-            if(PaginaAtual > 0)
-            {
-                EstadoSetas(1, true);
-            }
-            else
-            {
-                EstadoSetas(1, false);
-            }
-
-
-            if (PaginaAtual != ListaAuxiliar.Count - 1)
-            {
-                EstadoSetas(0, true);
-            }
-            else
-            {
-                EstadoSetas(0, false);
             }
         }
     }
@@ -259,11 +220,6 @@ public class LivroScript : MonoBehaviour
         {
             AlterarEtiquetaPrefacio(TipoAtual);
         }
-    }
-
-    private void EstadoSetas(int Seta, bool Estado)
-    {
-        Setas[Seta].SetActive(Estado);
     }
 
 
