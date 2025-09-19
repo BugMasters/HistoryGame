@@ -81,6 +81,7 @@
     <Compile Include="Assets\Scripts\Model\ListaPaginas.cs" />
     <Compile Include="Assets\Scripts\Enum\TipoRecurso.cs" />
     <Compile Include="Assets\Scripts\RecursosHUD.cs" />
+    <Compile Include="Assets\Scripts\TeleporteScript.cs" />
     <Compile Include="Assets\Scripts\CameraScript.cs" />
     <Compile Include="Assets\Scripts\Model\ListaFerramentas.cs" />
   </ItemGroup>

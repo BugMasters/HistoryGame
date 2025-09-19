@@ -37,8 +37,11 @@ public class JogadorScript : MonoBehaviour
 
     void FixedUpdate()
     {
-        Vector3 MovePosition = (Velocidade * Time.fixedDeltaTime * Position.normalized) + Rigid.position;
-        Rigid.MovePosition(MovePosition);
+        if (Move)
+        {
+            Vector3 MovePosition = (Velocidade * Time.fixedDeltaTime * Position.normalized) + Rigid.position;
+            Rigid.MovePosition(MovePosition);
+        }
     }
 
     void Movimentacao()
@@ -67,6 +70,11 @@ public class JogadorScript : MonoBehaviour
         {
             ColidindoComBancada = true;
         }
+
+        if (collision.CompareTag("Teleporte"))
+        {
+            Move = false;
+        }
     }
 
     void OnTriggerExit2D(Collider2D collision)
@@ -74,6 +82,11 @@ public class JogadorScript : MonoBehaviour
         if (collision.CompareTag("Bancada"))
         {
             ColidindoComBancada = false;
+        }
+
+        if (collision.CompareTag("Teleporte"))
+        {
+            Move = true;
         }
     }
 

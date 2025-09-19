@@ -148,7 +148,7 @@ public class LivroScript : MonoBehaviour
                 {
                     PaginaAtual++;
                 }
-                else
+                else if (PaginaAtual != 0)
                 {
                     PaginaAtual--;
                 }
