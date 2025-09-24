@@ -61,29 +61,16 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.2.2f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Model\ListaConstrucoes.cs" />
     <Compile Include="Assets\Scripts\EtiquetaScript.cs" />
-    <Compile Include="Assets\Scripts\Interface\IConstrucoes.cs" />
     <Compile Include="Assets\Scripts\JogadorScript.cs" />
-    <Compile Include="Assets\Scripts\Interface\IFabricaveis.cs" />
     <Compile Include="Assets\Scripts\LivroScript.cs" />
-    <Compile Include="Assets\Scripts\Model\Ferramentas\MachadoP.cs" />
-    <Compile Include="Assets\Scripts\ColetaveisScript.cs" />
     <Compile Include="Assets\Scripts\LivroController.cs" />
     <Compile Include="Assets\Scripts\Enum\TipoInformacao.cs" />
     <Compile Include="Assets\Scripts\Model\Livro\Pagina.cs" />
-    <Compile Include="Assets\Scripts\CabanaScript.cs" />
-    <Compile Include="Assets\Scripts\BancadaScript.cs" />
-    <Compile Include="Assets\Scripts\Interface\IFerramenta.cs" />
-    <Compile Include="Assets\Scripts\RecursosScript.cs" />
-    <Compile Include="Assets\Scripts\Model\Construcoes\ConstrucaoDef.cs" />
-    <Compile Include="Assets\Scripts\ConstrucaoScript.cs" />
+    <Compile Include="Assets\Scripts\InteragiveisScript.cs" />
     <Compile Include="Assets\Scripts\Model\ListaPaginas.cs" />
-    <Compile Include="Assets\Scripts\Enum\TipoRecurso.cs" />
-    <Compile Include="Assets\Scripts\RecursosHUD.cs" />
     <Compile Include="Assets\Scripts\TeleporteScript.cs" />
     <Compile Include="Assets\Scripts\CameraScript.cs" />
-    <Compile Include="Assets\Scripts\Model\ListaFerramentas.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

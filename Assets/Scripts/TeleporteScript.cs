@@ -5,11 +5,14 @@ public class TeleporteScript : MonoBehaviour
     [SerializeField] 
     private Transform Para;
 
-    [SerializeField] 
     private Transform Player;
 
     [SerializeField]
     private float Y;
+    private void Awake()
+    {
+        Player = GameObject.FindWithTag("Player").transform;
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
