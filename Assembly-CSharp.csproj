@@ -64,8 +64,6 @@
     <Compile Include="Assets\Scripts\EtiquetaScript.cs" />
     <Compile Include="Assets\Scripts\JogadorScript.cs" />
     <Compile Include="Assets\Scripts\LivroScript.cs" />
-    <Compile Include="Assets\Scripts\LivroController.cs" />
-    <Compile Include="Assets\Scripts\Enum\TipoInformacao.cs" />
     <Compile Include="Assets\Scripts\Model\Livro\Pagina.cs" />
     <Compile Include="Assets\Scripts\InteragiveisScript.cs" />
     <Compile Include="Assets\Scripts\Model\ListaPaginas.cs" />
