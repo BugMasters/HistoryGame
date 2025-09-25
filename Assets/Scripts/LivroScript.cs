@@ -1,6 +1,4 @@
-using Assets.Scripts.Enum;
 using Assets.Scripts.Model;
-using System.Linq;
 using TMPro;
 using UnityEngine;
 
@@ -10,70 +8,26 @@ public class LivroScript : MonoBehaviour
     private Animator animator;
 
     [SerializeField]
-    private GameObject Livro;
-
-    [SerializeField]
     private GameObject Pagina;
-
-    [SerializeField]
-    private GameObject Prefacio;
 
     [SerializeField]
     private ListaPaginas Paginas;
 
-    [SerializeField]
-    private TextMeshProUGUI TextoPaginaAtual;
-
-    #region :: Dados da Página ::
-
     [Header("Infos da Página")]
     [SerializeField] private TextMeshProUGUI Titulo;
-    [SerializeField] private TextMeshProUGUI Descricao;
+    [SerializeField] private TextMeshProUGUI[] Descricao;
 
-    #endregion
+    private int PaginaAtual;
 
-    private int PaginaAtual = 0;
+    void OnEnable()
+    {
+        PaginaAtual = 0;
+        AlterarPagina();
+    }
 
     void Update()
     {
         TrocarPagina();
-    }
-
-    private void PlayAnimationOnce()
-    {
-        animator.SetTrigger("PlayOnce");
-    }
-
-    private void AtualizarDadosPagina()
-    {
-        Titulo.text = Paginas.ListPaginas[PaginaAtual].Nome;
-        Descricao.text = Paginas.ListPaginas[PaginaAtual].Descricao;
-    }
-
-    private void AlterarPagina()
-    {
-        Pagina.SetActive(false);
-        AtualizarDadosPagina();
-        PlayAnimationOnce();
-    }
-
-    private bool VerificarTrocaPagina(bool Avancando)
-    {
-        if (PaginaAtual < Paginas.ListPaginas.Count - 1)
-        {
-            if (Avancando)
-            {
-                PaginaAtual++;
-            }
-            else if (PaginaAtual != 0)
-            {
-                PaginaAtual--;
-            }
-
-            return true;
-        }
-
-        return false;
     }
 
     private void TrocarPagina()
@@ -95,7 +49,42 @@ public class LivroScript : MonoBehaviour
         }
     }
 
-    private void TerminouAnimacao()
+    private void PlayAnimationOnce()
+    {
+        animator.SetTrigger("PlayOnce");
+    }
+
+    private void AtualizarDadosPagina()
+    {
+        Titulo.text = Paginas.ListPaginas[PaginaAtual].Nome;
+        Descricao[0].text = Paginas.ListPaginas[PaginaAtual].Descricao[0];
+        Descricao[1].text = Paginas.ListPaginas[PaginaAtual].Descricao[1];
+    }
+
+    private void AlterarPagina()
+    {
+        Pagina.SetActive(false);
+        AtualizarDadosPagina();
+        PlayAnimationOnce();
+    }
+
+    private bool VerificarTrocaPagina(bool Avancando)
+    {
+        if (Avancando && PaginaAtual + 1 < Paginas.ListPaginas.Count)
+        {
+            PaginaAtual++;
+            return true;
+        }
+        else if (!Avancando && PaginaAtual != 0)
+        {
+            PaginaAtual--;
+            return true;
+        }
+
+        return false;
+    }
+
+    public void TerminouAnimacao()
     {
         Pagina.SetActive(true);
     }

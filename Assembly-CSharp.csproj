@@ -61,10 +61,10 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.2.2f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\EtiquetaScript.cs" />
     <Compile Include="Assets\Scripts\JogadorScript.cs" />
     <Compile Include="Assets\Scripts\LivroScript.cs" />
     <Compile Include="Assets\Scripts\Model\Livro\Pagina.cs" />
+    <Compile Include="Assets\Scripts\PaginasScript.cs" />
     <Compile Include="Assets\Scripts\InteragiveisScript.cs" />
     <Compile Include="Assets\Scripts\Model\ListaPaginas.cs" />
     <Compile Include="Assets\Scripts\TeleporteScript.cs" />

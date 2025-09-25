@@ -32,7 +32,6 @@ public class JogadorScript : MonoBehaviour
         }
 
         AbrirBancada();
-        AbrirLivro();
     }
 
     void FixedUpdate()
@@ -66,11 +65,6 @@ public class JogadorScript : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Bancada"))
-        {
-            ColidindoComBancada = true;
-        }
-
         if (collision.CompareTag("Teleporte"))
         {
             Move = false;
@@ -79,22 +73,9 @@ public class JogadorScript : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("Bancada"))
-        {
-            ColidindoComBancada = false;
-        }
-
         if (collision.CompareTag("Teleporte"))
         {
             Move = true;
-        }
-    }
-
-    void AbrirLivro()
-    {
-        if (UnityEngine.Input.GetKeyDown(KeyCode.Tab))
-        {
-            Move = !Move;
         }
     }
 

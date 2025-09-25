@@ -1,5 +1,4 @@
-﻿using Assets.Scripts.Enum;
-using UnityEngine;
+﻿using UnityEngine;
 
 
 namespace Assets.Scripts.Model.Livro
@@ -10,9 +9,9 @@ namespace Assets.Scripts.Model.Livro
     {
         [Header("Infos da Página")]
         [SerializeField] private string nome;
-        [TextArea][SerializeField] private string descricao;
+        [TextArea][SerializeField] private string[] descricao;
 
         public string Nome => nome;
-        public string Descricao => descricao;
+        public string[] Descricao => descricao;
     }
 }
