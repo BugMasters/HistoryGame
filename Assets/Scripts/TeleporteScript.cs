@@ -9,6 +9,7 @@ public class TeleporteScript : MonoBehaviour
 
     [SerializeField]
     private float Y;
+
     private void Awake()
     {
         Player = GameObject.FindWithTag("Player").transform;

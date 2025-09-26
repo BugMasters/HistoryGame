@@ -24,7 +24,7 @@ public class InteragiveisScript : MonoBehaviour
 
     void AbrirHud()
     {
-        if (PlayerPerto)
+        if (PlayerPerto && HUD != null)
         {
             if (Input.GetKeyDown(KeyCode.E))
             {

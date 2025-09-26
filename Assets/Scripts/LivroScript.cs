@@ -65,6 +65,7 @@ public class LivroScript : MonoBehaviour
     {
         Pagina.SetActive(false);
         AtualizarDadosPagina();
+
         PlayAnimationOnce();
     }
 
