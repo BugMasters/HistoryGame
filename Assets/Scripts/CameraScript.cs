@@ -4,7 +4,6 @@ public class CameraScript : MonoBehaviour
 {
     [SerializeField]
     private Transform Player;
-
     void LateUpdate()
     {
         SeguirPlayer();

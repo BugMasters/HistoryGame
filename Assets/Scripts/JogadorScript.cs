@@ -20,7 +20,7 @@ public class JogadorScript : MonoBehaviour
 
     private bool Move = true;
 
-    private bool ColidindoComBancada = false;
+    private bool Colidindo = false;
 
     #endregion :: Atributos ::
 
@@ -31,7 +31,7 @@ public class JogadorScript : MonoBehaviour
             Movimentacao();
         }
 
-        AbrirBancada();
+        AbrirHud();
     }
 
     void FixedUpdate()
@@ -79,13 +79,29 @@ public class JogadorScript : MonoBehaviour
         }
     }
 
-    private void AbrirBancada()
+    void OnCollisionEnter2D(Collision2D collision)
     {
-        if (ColidindoComBancada)
+        if (collision.collider.CompareTag("Colidivel"))
+        {
+            Colidindo = true;
+        }
+    }
+
+    void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.collider.CompareTag("Colidivel"))
+        {
+            Colidindo = false;
+        }
+    }
+
+    private void AbrirHud()
+    {
+        if (Colidindo)
         {
             if (UnityEngine.Input.GetKeyDown(KeyCode.E))
             {
-                Move = !Move;
+                Move = false;
             }
 
             if (UnityEngine.Input.GetKeyDown(KeyCode.Escape))

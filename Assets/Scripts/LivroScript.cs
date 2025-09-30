@@ -11,7 +11,7 @@ public class LivroScript : MonoBehaviour
     private GameObject Pagina;
 
     [SerializeField]
-    private ListaPaginas Paginas;
+    public ListaPaginas Paginas;
 
     [Header("Infos da Página")]
     [SerializeField] private TextMeshProUGUI Titulo;

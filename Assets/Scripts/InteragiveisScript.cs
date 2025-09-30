@@ -12,6 +12,9 @@ public class InteragiveisScript : MonoBehaviour
 
     private bool PlayerPerto;
 
+    [SerializeField]
+    private bool AtivarHud;
+
     void Awake()
     {
         Renderer = GetComponent<SpriteRenderer>();    
@@ -19,7 +22,12 @@ public class InteragiveisScript : MonoBehaviour
 
     void Update()
     {
-        AbrirHud();
+        if (AtivarHud)
+        {
+            AbrirHud();
+        }
+
+        TrocarSprite();
     }
 
     void AbrirHud()
@@ -38,21 +46,31 @@ public class InteragiveisScript : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
+    void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.collider.CompareTag("Player"))
         {
-            Renderer.sprite = Sprites[1];
             PlayerPerto = true;
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.collider.CompareTag("Player"))
+        {
+            PlayerPerto = false;
+        }
+    }
+
+    private void TrocarSprite()
+    {
+        if (PlayerPerto)
+        {
+            Renderer.sprite = Sprites[1];
+        }
+        else
         {
             Renderer.sprite = Sprites[0];
-            PlayerPerto = false;
         }
     }
 }

@@ -64,12 +64,16 @@
     <Compile Include="Assets\Scripts\MolduraScript.cs" />
     <Compile Include="Assets\Scripts\JogadorScript.cs" />
     <Compile Include="Assets\Scripts\LivroScript.cs" />
+    <Compile Include="Assets\Scripts\TochaScript.cs" />
     <Compile Include="Assets\Scripts\Puzzles\PuzzleOne.cs" />
+    <Compile Include="Assets\Scripts\PanoScript.cs" />
     <Compile Include="Assets\Scripts\Model\Livro\Pagina.cs" />
     <Compile Include="Assets\Scripts\PaginasScript.cs" />
+    <Compile Include="Assets\Scripts\TochaBarScript.cs" />
     <Compile Include="Assets\Scripts\InteragiveisScript.cs" />
     <Compile Include="Assets\Scripts\Model\Quadro.cs" />
     <Compile Include="Assets\Scripts\Model\ListaPaginas.cs" />
+    <Compile Include="Assets\Scripts\Model\Enum\FaiscaForca.cs" />
     <Compile Include="Assets\Scripts\TeleporteScript.cs" />
     <Compile Include="Assets\Scripts\CameraScript.cs" />
   </ItemGroup>

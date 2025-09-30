@@ -5,7 +5,13 @@ using UnityEngine;
 public class PaginasScript : MonoBehaviour
 {
     [SerializeField]
-    private ListaPaginas[] ListaPaginas;
+    private ListaPaginas ListaPaginas;
+
+    [SerializeField]
+    private LivroScript Livro;
+
+    [SerializeField]
+    private GameObject LivroHud;
 
     private bool PlayerPerto;
 
@@ -20,18 +26,26 @@ public class PaginasScript : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
-                ListaPaginas[1].ListPaginas = new List<Assets.Scripts.Model.Livro.Pagina>(ListaPaginas[0].ListPaginas);
+                Livro.Paginas = ListaPaginas;
+                LivroHud.SetActive(true);
             }
         }
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
+    void OnCollisionEnter2D(Collision2D collision)
     {
-        PlayerPerto = true;
+        if (collision.collider.CompareTag("Player"))
+        {
+            PlayerPerto = true;
+        }
     }
-    void OnTriggerExit2D(Collider2D collision)
+
+    void OnCollisionExit2D(Collision2D collision)
     {
-        PlayerPerto = false;
+        if (collision.collider.CompareTag("Player"))
+        {
+            PlayerPerto = false;
+        }
     }
 
 }
