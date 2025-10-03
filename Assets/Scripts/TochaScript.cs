@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-public class TochaScript : MonoBehaviour, IDragHandler, IPointerEnterHandler, IPointerExitHandler
+public class TochaScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField]
     private GameObject Pano;
@@ -18,8 +18,7 @@ public class TochaScript : MonoBehaviour, IDragHandler, IPointerEnterHandler, IP
     [SerializeField]
     private Sprite[] FasesSelecao;
 
-    [SerializeField]
-    public RectTransform objetoUI;
+    private RectTransform rt;
 
     [SerializeField]
     private GameObject Perdeneira;
@@ -27,11 +26,14 @@ public class TochaScript : MonoBehaviour, IDragHandler, IPointerEnterHandler, IP
     [SerializeField]
     private Canvas canvas;
 
+    [SerializeField]
+    private HudMovelScript Hud;
+
     private Image Sprite;
 
     private int Fase;
 
-    private Vector3 destino = new Vector3(152, 135, 0);
+    private Vector3 destino = new Vector3(-15, -178, 0);
     private Vector3 rotacaoFinal = new Vector3(0, 0, 35);
 
     private float velocidade = 500f;
@@ -40,17 +42,22 @@ public class TochaScript : MonoBehaviour, IDragHandler, IPointerEnterHandler, IP
     void Awake()
     {
         Sprite = GetComponent<Image>();
+        rt = GetComponent<RectTransform>();
     }
 
     void Update()
     {
-        TrocarFase();
+        if(Fase < 3)
+        {
+            TrocarFase();
+        }
+
         Acender();
     } 
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if(Fase != 2)
+        if(Fase < 2)
         {
             Sprite.sprite = FasesSelecao[Fase];
         }
@@ -58,21 +65,9 @@ public class TochaScript : MonoBehaviour, IDragHandler, IPointerEnterHandler, IP
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        Sprite.sprite = Fases[Fase];
-    }
-
-    public void OnDrag(PointerEventData eventData)
-    {
-        if(Fase < 2)
+        if (Fase < 2)
         {
-            RectTransformUtility.ScreenPointToLocalPointInRectangle(
-                canvas.transform as RectTransform,
-                eventData.position,
-                canvas.worldCamera,
-                out Vector2 localPos
-            );
-
-            (transform as RectTransform).anchoredPosition = localPos;
+            Sprite.sprite = Fases[Fase];
         }
     }
 
@@ -93,9 +88,8 @@ public class TochaScript : MonoBehaviour, IDragHandler, IPointerEnterHandler, IP
     }
 
     private bool EstaColidindo(RectTransform alvo)
-    {
-        return RectTransformUtility.RectangleContainsScreenPoint(
-            alvo, transform.position, null);
+    { 
+        return RectTransformUtility.RectangleContainsScreenPoint(alvo, transform.position, null); 
     }
 
     private void Acender()
@@ -104,32 +98,33 @@ public class TochaScript : MonoBehaviour, IDragHandler, IPointerEnterHandler, IP
         {
             StartCoroutine(MoverCoroutine());
             AbrirHudPerdeneira();
+            Hud.Parar();
             Fase = 3;
         }
     }
 
     private IEnumerator MoverCoroutine()
     {
-        while (Vector3.Distance(objetoUI.anchoredPosition, destino) > 0.1f ||
-               Vector3.Distance(objetoUI.localEulerAngles, rotacaoFinal) > 0.1f)
+        while (Vector3.Distance(rt.anchoredPosition, destino) > 0.1f ||
+               Vector3.Distance(rt.localEulerAngles, rotacaoFinal) > 0.1f)
         {
-            objetoUI.anchoredPosition = Vector3.MoveTowards(
-                objetoUI.anchoredPosition,
+            rt.anchoredPosition = Vector3.MoveTowards(
+                rt.anchoredPosition,
                 destino,
                 velocidade * Time.deltaTime
             );
 
-            objetoUI.localEulerAngles = Vector3.MoveTowards(
-                objetoUI.localEulerAngles,
-                rotacaoFinal,
+            rt.localRotation = Quaternion.RotateTowards(
+                rt.localRotation,
+                Quaternion.Euler(rotacaoFinal),
                 velocidadeRotacao * Time.deltaTime
             );
 
             yield return null;
         }
 
-        objetoUI.anchoredPosition = destino;
-        objetoUI.localEulerAngles = rotacaoFinal;
+        rt.anchoredPosition = destino;
+        rt.localEulerAngles = rotacaoFinal;
     }
 
     private void AbrirHudPerdeneira()

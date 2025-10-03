@@ -8,6 +8,9 @@ public class InteragiveisScript : MonoBehaviour
     [SerializeField]
     private GameObject HUD;
 
+    [SerializeField]
+    private CameraScript Camera;
+
     private SpriteRenderer Renderer;
 
     private bool PlayerPerto;
@@ -37,11 +40,13 @@ public class InteragiveisScript : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E))
             {
                 HUD.SetActive(true);
+                Camera.Movimento();
             }
 
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 HUD.SetActive(false);
+                Camera.Movimento();
             }
         }
     }

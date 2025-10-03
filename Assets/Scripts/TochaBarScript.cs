@@ -14,7 +14,7 @@ public class TochaBarScript : MonoBehaviour
     private float YMIN;
 
     [SerializeField]
-    private GameObject Silex;
+    private RectTransform Silex;
 
     [SerializeField]
     private ParticleSystem Faiscas;
@@ -40,10 +40,10 @@ public class TochaBarScript : MonoBehaviour
     {
         rt = GetComponent<RectTransform>();
 
-        SilexInicio = Silex.transform.position;
+        SilexInicio = Silex.anchoredPosition;
 
-        Max = new Vector3(transform.position.x, YMAX);
-        Min = new Vector3(transform.position.x, YMIN);
+        Max = new Vector2(rt.anchoredPosition.x, YMAX);
+        Min = new Vector2(rt.anchoredPosition.x, YMIN);
         Para = Max;
     }
 
@@ -57,16 +57,16 @@ public class TochaBarScript : MonoBehaviour
     {
         if (Mover)
         {
-            if (rt.position.y == YMAX)
+            if (rt.anchoredPosition.y == YMAX)
             {
                 Para = Min;
             }
-            else if (rt.position.y == YMIN)
+            else if (rt.anchoredPosition.y == YMIN)
             {
                 Para = Max;
             }
 
-            rt.position = Vector3.MoveTowards(rt.position, Para, Velocidade * Time.deltaTime);
+            rt.anchoredPosition = Vector3.MoveTowards(rt.anchoredPosition, Para, Velocidade * Time.deltaTime);
         }
     }
 
@@ -81,13 +81,13 @@ public class TochaBarScript : MonoBehaviour
 
     private void AtivarFaisca()
     {
-        float parou = rt.position.y;
+        float parou = rt.anchoredPosition.y;
 
-        if (parou >= -50 || parou <= -53.3)
+        if (parou >= 80 || parou <= -95)
         {
             MoverSilex((float)FaiscaForca.Fraca);
         }
-        else if (parou >= 51.2 || parou <= 52.1)
+        else if (parou >= 15 || parou <= -30)
         {
             MoverSilex((float)FaiscaForca.Media) ;
         }
@@ -107,23 +107,23 @@ public class TochaBarScript : MonoBehaviour
     {
         silexEmMovimento = true;
 
-        Vector3 destino = new Vector3(SilexInicio.x, SilexInicio.y - 3);
+        Vector3 destino = new Vector3(SilexInicio.x, SilexInicio.y - 150);
 
         var emission = Faiscas.emission;
         emission.rateOverTime = FaiscaEmission;
         Faiscas.Play();
 
-        while (Vector3.Distance(Silex.transform.position, destino) > 0.01f)
+        while (Vector3.Distance(Silex.anchoredPosition, destino) > 0.01f)
         {
-            Silex.transform.position = Vector3.MoveTowards(Silex.transform.position, destino, VelocidadeSilex * Time.deltaTime);
+            Silex.anchoredPosition = Vector3.MoveTowards(Silex.anchoredPosition, destino, VelocidadeSilex * Time.deltaTime);
             yield return null;
         }
 
         yield return new WaitForSeconds(0.2f);
 
-        while (Vector3.Distance(Silex.transform.position, SilexInicio) > 0.01f)
+        while (Vector3.Distance(Silex.anchoredPosition, SilexInicio) > 0.01f)
         {
-            Silex.transform.position = Vector3.MoveTowards(Silex.transform.position, SilexInicio, VelocidadeSilex * Time.deltaTime);
+            Silex.anchoredPosition = Vector3.MoveTowards(Silex.anchoredPosition, SilexInicio, VelocidadeSilex * Time.deltaTime);
             yield return null;
         }
 

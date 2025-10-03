@@ -29,6 +29,11 @@ public class PaginasScript : MonoBehaviour
                 Livro.Paginas = ListaPaginas;
                 LivroHud.SetActive(true);
             }
+
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                LivroHud.SetActive(false);
+            }
         }
     }
 
