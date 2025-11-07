@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\MolduraScript.cs" />
+    <Compile Include="Assets\Scripts\PlayerVidaScript.cs" />
     <Compile Include="Assets\Scripts\JogadorScript.cs" />
     <Compile Include="Assets\Scripts\LivroScript.cs" />
     <Compile Include="Assets\Scripts\TochaScript.cs" />
@@ -73,6 +74,7 @@
     <Compile Include="Assets\Scripts\HudMovelScript.cs" />
     <Compile Include="Assets\Scripts\InteragiveisScript.cs" />
     <Compile Include="Assets\Scripts\Model\Quadro.cs" />
+    <Compile Include="Assets\Scripts\InimigoScript.cs" />
     <Compile Include="Assets\Scripts\Model\ListaPaginas.cs" />
     <Compile Include="Assets\Scripts\Model\Enum\FaiscaForca.cs" />
     <Compile Include="Assets\Scripts\TeleporteScript.cs" />

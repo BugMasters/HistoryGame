@@ -1,0 +1,4 @@
+repository "HistoryGame/HistoryGame@4673200379953@cloud"
+  path "/"
+    br "/main"
+    co "/main"
